@@ -25,6 +25,20 @@ def get_chars_dict(text):
 def get_book_text(path):
     with open(path) as f:
         return f.read()
+    
 
+def get_chars_count(text):
+    char_count = {}
+    for char in text.lower():
+        if char.isalpha():
+            char_count[char] = char_count.get(char, 0) + 1
+    chars_list = []
+    for char, count in char_count.items():
+        char_dict = {"char": char, "num": count}
+        chars_list.append(char_dict)
 
+    def sort_on(dict):
+        return dict["num"]
+    chars_list.sort(reverse=True, key=sort_on)
+    return chars_list
 main()
